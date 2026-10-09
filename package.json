@@ -1,0 +1,41 @@
+{
+  "name": "screendraft",
+  "version": "0.2.0",
+  "description": "ScreenDraft - a creative screenplay writing app with timeline, character sheets and Word export",
+  "main": "electron/main.js",
+  "private": true,
+  "scripts": {
+    "dev:renderer": "vite",
+    "dev:electron": "wait-on tcp:5173 && cross-env NODE_ENV=development electron .",
+    "dev": "concurrently -k \"npm:dev:renderer\" \"npm:dev:electron\"",
+    "build:renderer": "vite build",
+    "build": "npm run build:renderer && electron-builder"
+  },
+  "build": {
+    "appId": "com.example.screendraft",
+    "productName": "ScreenDraft",
+    "files": ["dist/**/*", "electron/**/*"],
+    "mac": { "category": "public.app-category.productivity" },
+    "win": { "target": "nsis", "icon": "build/icon.ico" },
+    "nsis": { "createDesktopShortcut": "always", "createStartMenuShortcut": true, "shortcutName": "ScreenDraft" },
+    "linux": { "target": "AppImage", "category": "Office" },
+    "directories": { "output": "release" }
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3",
+    "typescript": "^5.5.3",
+    "vite": "^5.3.1",
+    "wait-on": "^7.2.0"
+  },
+  "dependencies": {
+    "docx": "^8.5.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}
